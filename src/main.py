@@ -16,9 +16,13 @@ except ImportError:
 except Exception as e:
     logging.warning(f"Could not load .env file: {e}")
 
+# Remove existing handlers (uvicorn has already installed them)
+for handler in logging.root.handlers[:]:
+    logging.root.removeHandler(handler)
+
 # Configure logging
 logging.basicConfig(
-    level=logging.INFO,
+    level=logging.DEBUG,
     format='%(asctime)s - %(name)s - %(levelname)s - %(message)s'
 )
 
